@@ -2,6 +2,7 @@
 
 namespace MWStake\MediaWiki\Component\ProxySpecialPage\Special;
 
+use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Title\TitleFactory;
 use OOUI\HtmlSnippet;
 use OOUI\MessageWidget;
@@ -9,6 +10,8 @@ use OOUI\MessageWidget;
 abstract class DashboardProxyBase extends \SpecialPage {
 
 	protected TitleFactory $titleFactory;
+
+	protected PermissionManager $permissionManager;
 
 	/**
 	 * @inheritDoc
@@ -21,6 +24,7 @@ abstract class DashboardProxyBase extends \SpecialPage {
 		$includable = false ) {
 		parent::__construct( $name, $restriction, $listed, $function, $file, $includable );
 		$this->titleFactory = \MediaWiki\MediaWikiServices::getInstance()->getTitleFactory();
+		$this->permissionManager = \MediaWiki\MediaWikiServices::getInstance()->getPermissionManager();
 	}
 
 	/**
@@ -31,33 +35,67 @@ abstract class DashboardProxyBase extends \SpecialPage {
 		parent::execute( $subPage );
 		$this->getOutput()->enableOOUI();
 		$inclusionTargetName = $this->getInclusionTargetName();
-		$userName = $this->getUser()->getName();
+
+		$this->getOutput()->addWikiTextAsInterface( '{{' . $inclusionTargetName . '}}' );
+
+		$notice = $this->getNotice();
+		if ( $notice ) {
+			$customizeInfo = new MessageWidget( [
+				'label' => new HtmlSnippet( $notice->parse() ),
+				'inline' => true,
+				'classes' => [ 'mwstake-component-proxyspecialpage-dashboard-info-cnt' ]
+			] );
+			$this->getOutput()->addHTML( $customizeInfo );
+		}
+	}
+
+	/**
+	 * @return Message|null
+	 */
+	protected function getNotice() {
+		$user = $this->getUser();
+		$userName = $user->getName();
+		$inclusionTargetName = $this->getInclusionTargetName();
 		$userOverrideInclusionTargetName = "$userName/$inclusionTargetName";
 		$userOverrideInclusionTarget = $this->titleFactory->makeTitle(
 			NS_USER,
 			$userOverrideInclusionTargetName
 		);
-		// TODO: Permission check if user can edit $inclusionTargetName
+
+		$inclusionTitle = $this->titleFactory->newFromText( $inclusionTargetName );
+		$canEditForAll = $this->permissionManager->userCan( 'edit', $user, $inclusionTitle );
+		$canEditUser = $this->permissionManager->userCan( 'edit', $user, $userOverrideInclusionTarget );
+		if ( !$canEditForAll && !$canEditUser ) {
+			return null;
+		}
+
 		// TODO: Add $inclusionTargetName as `preload` parameter if $userOverrideInclusionTarget does not exist yet
 		if ( $userOverrideInclusionTarget->exists() ) {
+			if ( !$canEditUser ) {
+				return null;
+			}
 			$inclusionTargetName = $userOverrideInclusionTarget->getPrefixedDBkey();
-			$customizeInfoMsg = $this->msg(
-				'bs-galaxy-dashboard-overridden-info',
+			return $this->msg(
+				'mwstake-component-proxyspecialpage-dashboard-overridden-info',
 				$userOverrideInclusionTargetName
 			);
 		} else {
-			$customizeInfoMsg = $this->msg(
-				'bs-galaxy-dashboard-override-link',
-				$userOverrideInclusionTargetName,
-				$inclusionTargetName
-			);
-		}
-		$customizeInfo = new MessageWidget( [
-			'label' => new HtmlSnippet( $customizeInfoMsg->parse() )
-		] );
-		$this->getOutput()->addHTML( $customizeInfo );
+			if ( !$canEditForAll && $canEditUser ) {
+				return $this->msg(
+					'mwstake-component-proxyspecialpage-user-override-link',
+					$userOverrideInclusionTargetName . '?preload=' . $inclusionTargetName
+				);
+			}
 
-		$this->getOutput()->addWikiTextAsInterface( '{{' . $inclusionTargetName . '}}' );
+			if ( $canEditForAll && $canEditUser ) {
+				return $this->msg(
+					'mwstake-component-proxyspecialpage-dashboard-override-link',
+					$userOverrideInclusionTargetName,
+					$inclusionTargetName
+				);
+			}
+		}
+		return null;
 	}
 
 	/**

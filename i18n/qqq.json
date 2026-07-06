@@ -2,7 +2,7 @@
 	"@metadata": {
 		"authors": []
 	},
-	"apihelp-mwstake-commonui-skinslot-summary": "{{doc-apihelp-summary|mwstake-commonui-skinslot}}",
-	"apihelp-mwstake-commonui-skinslot-param-path": "{{doc-apihelp-param|mwstake-commonui-skinslot|path}}",
-	"apihelp-mwstake-commonui-skinslot-param-context": "{{doc-apihelp-param|mwstake-commonui-skinslot|context}}"
+	"mwstake-component-proxyspecialpage-dashboard-overridden-info": "Information message shown when viewing a customized version of the dashboard. Parameters: $1 - username",
+	"mwstake-component-proxyspecialpage-dashboard-override-link": "Message with links to customize the dashboard. Parameters: $1 - user page title, $2 - global dashboard page title",
+	"mwstake-component-proxyspecialpage-user-override-link": "Message with link to customize the dashboard.\n Parameters:\n* - $1 - user page title"
 }

@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": []
 	},
-	"mwstake-component-proxyspecialpage-dashboard-overridden-info": "Information message shown when viewing a customized version of the dashboard. Parameters: $1 - username",
-	"mwstake-component-proxyspecialpage-dashboard-override-link": "Message with links to customize the dashboard. Parameters: $1 - user page title, $2 - global dashboard page title"
+	"mwstake-component-proxyspecialpage-dashboard-overridden-info": "{{#FORMAL:Du siehst|Sie sehen}} eine [[User:$1|angepasste Version]] dieses Dashboards. [[Special:Delete/$1|Rückgängig machen]].",
+	"mwstake-component-proxyspecialpage-dashboard-override-link": "{{#FORMAL:Du kannst|Sie können}} [[User:$1|dieses Dashboard anpassen]] oder [[$2:es für alle Benutzer ändern]]",
+	"mwstake-component-proxyspecialpage-user-override-link": "{{#FORMAL:Du kannst|Sie können}} [[User:$1|das Dashboard individuell anpassen]]"
 }

@@ -3,5 +3,6 @@
 		"authors": []
 	},
 	"mwstake-component-proxyspecialpage-dashboard-overridden-info": "You see a [[User:$1|customized version]] of this dashboard. [[Special:Delete/$1|Undo]].",
-	"mwstake-component-proxyspecialpage-dashboard-override-link": "You can [[User:$1|customize this dashboard]] or [[$2|alter it for all users]]."
+	"mwstake-component-proxyspecialpage-dashboard-override-link": "You can [[User:$1|customize this dashboard]] or [[$2|alter it for all users]].",
+	"mwstake-component-proxyspecialpage-user-override-link": "You can [[User:$1|customize this dashboard]]."
 }
