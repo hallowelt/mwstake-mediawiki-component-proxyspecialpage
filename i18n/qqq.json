@@ -1,6 +1,8 @@
 {
 	"@metadata": {
-		"authors": []
+		"authors": [
+			"Hallo Welt! GmbH"
+		]
 	},
 	"mwstake-component-proxyspecialpage-dashboard-overridden-info": "Information message shown when viewing a customized version of the dashboard. Parameters: $1 - username",
 	"mwstake-component-proxyspecialpage-dashboard-override-link": "Message with links to customize the dashboard. Parameters: $1 - user page title, $2 - global dashboard page title",

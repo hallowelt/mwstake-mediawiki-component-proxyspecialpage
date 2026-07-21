@@ -1,6 +1,8 @@
 {
 	"@metadata": {
-		"authors": []
+		"authors": [
+			"Hallo Welt! GmbH"
+		]
 	},
 	"mwstake-component-proxyspecialpage-dashboard-overridden-info": "{{#FORMAL:Du siehst|Sie sehen}} eine [[User:$1|angepasste Version]] dieses Dashboards. [[Special:Delete/$1|Rückgängig machen]].",
 	"mwstake-component-proxyspecialpage-dashboard-override-link": "{{#FORMAL:Du kannst|Sie können}} [[User:$1|dieses Dashboard anpassen]] oder [[$2|es für alle Benutzer ändern]]",
