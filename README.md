@@ -4,6 +4,7 @@
 **This code is meant to be executed within the MediaWiki application context. No standalone usage is intended.**
 
 ## Compatibility
+- \>= `2.0.x` -> MediaWiki 1.47
 - `1.0.x` -> MediaWiki 1.43
 
 ## Prerequisites
@@ -15,7 +16,7 @@ Require this component in the `composer.json` of your extension:
 ```json
 {
 	"require": {
-		"mwstake/mediawiki-component-proxyspecialpage": "~1"
+		"mwstake/mediawiki-component-proxyspecialpage": "~2"
 	}
 }
 ```
