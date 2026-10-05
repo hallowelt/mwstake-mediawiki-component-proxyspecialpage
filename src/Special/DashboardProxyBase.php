@@ -3,11 +3,12 @@
 namespace MWStake\MediaWiki\Component\ProxySpecialPage\Special;
 
 use MediaWiki\Permissions\PermissionManager;
+use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Title\TitleFactory;
 use OOUI\HtmlSnippet;
 use OOUI\MessageWidget;
 
-abstract class DashboardProxyBase extends \SpecialPage {
+abstract class DashboardProxyBase extends SpecialPage {
 
 	protected TitleFactory $titleFactory;
 
