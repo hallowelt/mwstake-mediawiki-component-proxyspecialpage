@@ -2,6 +2,7 @@
 
 namespace MWStake\MediaWiki\Component\ProxySpecialPage\Special;
 
+use MediaWiki\Message\Message;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Title\TitleFactory;
