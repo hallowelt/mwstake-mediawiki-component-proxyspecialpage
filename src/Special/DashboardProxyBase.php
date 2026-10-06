@@ -2,6 +2,7 @@
 
 namespace MWStake\MediaWiki\Component\ProxySpecialPage\Special;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Message\Message;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\SpecialPage\SpecialPage;
@@ -18,15 +19,10 @@ abstract class DashboardProxyBase extends SpecialPage {
 	/**
 	 * @inheritDoc
 	 */
-	public function __construct( $name = '',
-		$restriction = '',
-		$listed = true,
-		$function = false,
-		$file = '',
-		$includable = false ) {
-		parent::__construct( $name, $restriction, $listed, $function, $file, $includable );
-		$this->titleFactory = \MediaWiki\MediaWikiServices::getInstance()->getTitleFactory();
-		$this->permissionManager = \MediaWiki\MediaWikiServices::getInstance()->getPermissionManager();
+	public function __construct( $name = '' ) {
+		parent::__construct( $name );
+		$this->titleFactory = MediaWikiServices::getInstance()->getTitleFactory();
+		$this->permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
 	}
 
 	/**
